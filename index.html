@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday My Love ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #ff4d8d;
+      --secondary: #ff1a75;
+      --accent: #ff99c2;
+      --text-light: #fff9fb;
+      --text-dark: #33001a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffcce6, #ffb3d9);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      margin: 15px 0;
+      padding: 15px;
+    }
+
+    h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.2rem;
+      color: var(--secondary);
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .birthday-message {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .birthday-message span {
+      display: block;
+      margin-bottom: 12px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+
+    .birthday-message span.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .counter {
+      font-size: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 12px 20px;
+      border-radius: 20px;
+      box-shadow: 0 3px 10px rgba(255, 26, 117, 0.3);
+      text-align: center;
+      margin: 15px auto;
+      width: 90%;
+      max-width: 350px;
+    }
+
+    .counter .digit {
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+
+    .counter-inner {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .photo-frame {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      border: 8px solid white;
+      border-radius: 8px;
+      background-color: #ffe6f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .floating-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      pointer-events: none;
+      animation: float 6s ease-in infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .audio-notice {
+      font-size: 0.8rem;
+      color: var(--secondary);
+      text-align: center;
+      margin-top: 10px;
+      opacity: 0.8;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+</head>
+<body>
+  <div class="floating-hearts" id="hearts-container"></div>
+
+  <div class="container">
+    <h1>Happy Birthday, My Beautiful Wife 💖</h1>
+
+    <div class="photo-frame">
+      <div style="text-align: center; padding: 15px;">
+        <i class="fas fa-heart" style="font-size: 2.5rem; color: var(--accent);"></i>
+        <p style="margin-top: 10px; font-size: 0.9rem;">Our Photo Here</p>
+      </div>
+    </div>
+
+    <div class="birthday-message" id="message">
+      <span>My beautiful wife 💞</span>
+      <span>Happy Birthday Thangam 🎂</span>
+      <span>May Allah bless you 🍀</span>
+      <span>And give you much happiness 💕</span>
+      <span>I love you ❤️</span>
+      <span>And I will always love you 🥺</span>
+      <span>Hope you have a wonderful day usuruuu 😘</span>
+    </div>
+
+    <div class="counter">
+      <div class="counter-inner">
+        <div><span class="digit" id="days">0</span><br>Days</div>
+        <div><span class="digit" id="hours">00</span><br>Hours</div>
+        <div><span class="digit" id="minutes">00</span><br>Minutes</div>
+        <div><span class="digit" id="seconds">00</span><br>Seconds</div>
+      </div>
+    </div>
+
+    <p class="audio-notice">Background music is playing ♫</p>
+  </div>
+
+  <audio id="birthdayAudio" autoplay loop>
+    <source src="aud.mp3" type="audio/mp3">
+  </audio>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(function () {
+      const audio = document.getElementById('birthdayAudio');
+      const promise = audio.play();
+      if (promise !== undefined) {
+        promise.catch(error => {
+          $('body').append('<button id="audioButton" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);padding:10px 20px;background:var(--primary);color:white;border:none;border-radius:50px;z-index:100;">Play Music</button>');
+          $('#audioButton').click(function () {
+            audio.play();
+            $(this).remove();
+          });
+        });
+      }
+
+      $("#message span").each(function (index) {
+        $(this).delay(300 * index).queue(function () {
+          $(this).addClass("visible").dequeue();
+        });
+      });
+
+      updateCounter();
+      setInterval(updateCounter, 1000);
+
+      createHearts();
+      setTimeout(createHeartBurst, 1000);
+    });
+
+    function updateCounter() {
+      const birthDate = new Date("2003-05-09T00:00:00");
+      const now = new Date();
+      const diff = now - birthDate;
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / (3600 * 24));
+      const hours = Math.floor((totalSeconds % (3600 * 24)) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+    }
+
+    function createHearts() {
+      const colors = ['#ff4d8d', '#ff1a75', '#ff66b3', '#ff99c2'];
+      for (let i = 0; i < 10; i++) {
+        setTimeout(() => createHeart(colors), i * 1000);
+      }
+    }
+
+    function createHeart(colors, burst = false) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.fontSize = `${Math.random() * 16 + 12}px`;
+      heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.top = burst ? '80vh' : `${100 + Math.random() * 20}vh`;
+      heart.style.opacity = '0';
+
+      document.getElementById('hearts-container').appendChild(heart);
+      setTimeout(() => heart.style.opacity = '0.7', 100);
+      setTimeout(() => {
+        heart.remove();
+        if (!burst) createHeart(colors);
+      }, 6000);
+    }
+
+    function createHeartBurst() {
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => createHeart(['#ff4d8d', '#ff1a75', '#ff66b3', '#ff99c2'], true), i * 150);
+      }
+    }
+  </script>
+</body>
+</html>
