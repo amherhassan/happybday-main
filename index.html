@@ -106,12 +106,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden; /* Ensures image stays within frame */
     }
 
     .photo-frame img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: cover; /* Ensures image fills frame nicely */
+      transition: transform 0.3s ease;
+    }
+
+    .photo-frame:hover img {
+      transform: scale(1.05); /* Slight zoom on hover */
     }
 
     .floating-hearts {
@@ -160,11 +166,10 @@
   <div class="container">
     <h1>Happy Birthday, My Beautiful Wife 💖</h1>
 
+    <!-- Updated Photo Frame with Image -->
     <div class="photo-frame">
-      <div style="text-align: center; padding: 15px;">
-        <i class="fas fa-heart" style="font-size: 2.5rem; color: var(--accent);"></i>
-        <p style="margin-top: 10px; font-size: 0.9rem;">Our Photo Here</p>
-      </div>
+      <!-- REPLACE THIS URL WITH YOUR IMAGE URL -->
+      <img src="our.png" alt="Our beautiful photo">
     </div>
 
     <div class="birthday-message" id="message">
